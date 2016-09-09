@@ -1,9 +1,8 @@
 FROM alpine
 
+ENV GIT_DIR=/work
 RUN apk --no-cache add git-svn openssh perl-git subversion \
- && mkdir -p /work
+ && mkdir -p $GIT_DIR
 ADD data/ /
-
-WORKDIR /work
 
 ENTRYPOINT [ "/init.sh" ]
