@@ -23,7 +23,7 @@ if [ -e /authors.txt ]; then
   git config --add svn.authorsfile /authors.txt
 fi
 
-git svn fetch $GIT_SVN_FIRST_FETCH_OPTIONS
+git svn fetch -q
 git gc
 
 # To sync remains of other (past) git-svn client
