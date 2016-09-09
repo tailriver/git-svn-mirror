@@ -2,9 +2,6 @@
 
 set -e -x
 
-mkdir -p /work
-cd /work
-
 # Execute dummy subversion command to store password
 if [ -n "$SVN_USERNAME" -a -n "$SVN_PASSWORD" ]; then
   svn info \
