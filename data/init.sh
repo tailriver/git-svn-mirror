@@ -26,6 +26,6 @@ fi
 git svn fetch -q
 git gc
 
-git push -u origin master
+git push origin
 
-crond -f
+exec crond -f

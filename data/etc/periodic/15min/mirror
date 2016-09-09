@@ -2,4 +2,4 @@
 
 cd /work
 git svn fetch
-git push
+git push origin
