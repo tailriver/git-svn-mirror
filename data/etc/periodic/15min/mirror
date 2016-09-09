@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /work
+git svn fetch
+git push origin

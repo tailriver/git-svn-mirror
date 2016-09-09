@@ -1,0 +1,19 @@
+#!/bin/sh
+
+pushd $(dirname $0) >/dev/null
+bindir=$(pwd)
+popd >/dev/null
+
+image=git-svn-mirror
+
+if [ -z "$tag" ]; then
+  tag=dev
+fi
+
+docker run -d \
+  --name $image-test \
+  --env-file $bindir/.env \
+  -v $bindir/authors.txt:/root/authors.txt:ro \
+  -v $bindir/.ssh:/root/.ssh:ro \
+  $@ \
+  tailriver/$image:dev
