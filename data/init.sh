@@ -19,6 +19,9 @@ git --bare init
 git --bare svn init --prefix=svn/ $GIT_SVN_INIT_OPTIONS $SVN_REPOSITORY
 git remote add origin $GIT_REPOSITORY
 git config --add remote.origin.push 'refs/remotes/svn/*:refs/heads/*'
+if [ -e /authors.txt ]; then
+  git config --add svn.authorsfile /authors.txt
+fi
 
 git svn fetch $GIT_SVN_FIRST_FETCH_OPTIONS
 git gc
