@@ -26,4 +26,8 @@ fi
 git svn fetch
 git gc
 
+# To sync remains of other (past) git-svn client
+git pull
+git push -u origin master
+
 crond -f
