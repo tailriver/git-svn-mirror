@@ -1,9 +1,10 @@
 #!/bin/sh
 
-set -e -x
+set -e
 
-mkdir -p /work
-cd /work
+if [ "$DEBUG" == "1" ]; then
+  set -x
+fi
 
 # Execute dummy subversion command to store password
 if [ -n "$SVN_USERNAME" -a -n "$SVN_PASSWORD" ]; then
@@ -14,16 +15,17 @@ if [ -n "$SVN_USERNAME" -a -n "$SVN_PASSWORD" ]; then
     $SVN_REPOSITORY
 fi
 
-git init --bare
-git svn init --stdlayout --prefix=svn/ $SVN_REPOSITORY
+git --bare init
+git --bare svn init --prefix=svn/ $GIT_SVN_INIT_OPTIONS $SVN_REPOSITORY
 git remote add origin $GIT_REPOSITORY
 git config --add remote.origin.push 'refs/remotes/svn/*:refs/heads/*'
-
-if [ -e /root/authors.txt ]; then
-  git config --add svn.authorsfile /root/authors.txt
+if [ -e /authors.txt ]; then
+  git config --add svn.authorsfile /authors.txt
 fi
 
-git svn fetch
+git svn fetch -q
 git gc
 
-crond -f
+git push origin
+
+exec crond -f
