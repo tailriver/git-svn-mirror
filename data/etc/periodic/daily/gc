@@ -1,4 +1,4 @@
 #!/bin/sh
 
-cd $GIT_SVN_WORKDIR
+cd /work
 git gc
