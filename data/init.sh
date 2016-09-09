@@ -1,6 +1,10 @@
 #!/bin/sh
 
-set -e -x
+set -e
+
+if [ "$DEBUG" == "1" ]; then
+  set -x
+fi
 
 # Execute dummy subversion command to store password
 if [ -n "$SVN_USERNAME" -a -n "$SVN_PASSWORD" ]; then
